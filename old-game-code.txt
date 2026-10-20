@@ -1,103 +1,61 @@
-MOV R0,#15
-Mov R12,#msgWin
-MOV R11,#msgLose
-MOV R10,#1
-MOV R9,#msgReact
-6|
- MOV R1,#msgTotal
-7|
- MOV R8,#msgBad
-8|
- MOV R7,#msgRoboPlay
-9|
- STR R0, .WriteUnsignedNum
-10|
- STR R1, .WriteString
-11|
- B Turn
-12|Turn:
-13|
- MOV R2,#msgPrompt
-14|
- STR R2, .WriteString
-15|
- LDR R3,.InputNum
-16|
- CMP R3,#1
-17|
- BLT Invalid
-18|
- CMP R3,#3
-19|
- BGT Invalid
-20|
- SUB R0,R0,R3
-21|
- CMP R0,#1
-22|
- BLT lose
-23|
- STR R0, .WriteUnsignedNum
-24|
- STR R9, .WriteString
-25|
- B roboRando
-26|roboPlay:
-27|
- STR R6, .WriteUnsignedNum
-28|
- STR R7, .WriteString
-29|
- STR R0, .WriteUnsignedNum
-30|
- STR R9, .WriteString
-31|
- CMP R0,#0
-32|
- BEQ win
-33|
- B Turn
-34|roboRando:
-35|
- LDR R6,.Random
-36|
- LSR R6, R6,#30
-37|
- B select
-38|select:
-39|
- CMP R6,#1
-40|
- BLT roboRando
-41|
- CMP R6,R0
-42|
- BGT roboRando
-43|
- SUB R0,R0,R6
-44|
- B roboPlay
-45|Invalid:
-46|
- STR R8, .WriteString
-47|
- B Turn
-48|win:
-49|
- STR R12, .WriteString
-50|
- Halt
-51|lose:
-52|
- STR R11, .WriteString
-53|
- Halt
-54|
- Halt
-55|msgTotal: .asciz "remaining\n"
-56|msgPrompt: .asciz "Remove 1-3 pebbles:\n"
-57|msgReact: .asciz "pebbles remain.\n"
-58|msgBad: .asciz "Pretty sure I said remove 1-3 pebbles. You CAN read, right?\n"
-59|msgRoboPlay: .asciz "pebbles were picked up by computer.\n"
-60|msgWin: .asciz "Computer took the last pebble, you win!"
-61|msgLose: .asciz "You took the last pebble, you lose."
+  1|      MOV R0,#15
+  2|      Mov R12,#msgWin
+  3|      MOV R11,#msgLose
+  4|      MOV R10,#1
+  5|      MOV R9,#msgReact
+  6|      MOV R1,#msgTotal
+  7|      MOV R8,#msgBad
+  8|      MOV R7,#msgRoboPlay
+  9|      STR R0, .WriteUnsignedNum
+ 10|      STR R1, .WriteString
+ 11|      B Turn
+ 12|Turn:
+ 13|      MOV R2,#msgPrompt
+ 14|      STR R2, .WriteString
+ 15|      LDR R3,.InputNum
+ 16|      CMP R3,#1
+ 17|      BLT Invalid
+ 18|      CMP R3,#3
+ 19|      BGT Invalid
+ 20|      SUB R0,R0,R3
+ 21|      CMP R0,#1
+ 22|      BLT lose
+ 23|      STR R0, .WriteUnsignedNum
+ 24|      STR R9, .WriteString
+ 25|      B roboRando
+ 26|roboPlay:
+ 27|      STR R6, .WriteUnsignedNum
+ 28|      STR R7, .WriteString
+ 29|      STR R0, .WriteUnsignedNum
+ 30|      STR R9, .WriteString
+ 31|      CMP R0,#0
+ 32|      BEQ win
+ 33|      B Turn
+ 34|roboRando:
+ 35|      LDR R6,.Random
+ 36|      LSR R6, R6,#30
+ 37|      B select
+ 38|select:
+ 39|      CMP R6,#1
+ 40|      BLT roboRando
+ 41|      CMP R6,R0
+ 42|      BGT roboRando
+ 43|      SUB R0,R0,R6
+ 44|      B roboPlay
+ 45|Invalid:
+ 46|      STR R8, .WriteString
+ 47|      B Turn
+ 48|win:
+ 49|      STR R12, .WriteString
+ 50|      Halt
+ 51|lose:
+ 52|      STR R11, .WriteString
+ 53|      Halt
+ 54|      Halt
+ 55|msgTotal: .asciz "remaining\n"
+ 56|msgPrompt: .asciz "Remove 1-3 pebbles:\n"
+ 57|msgReact: .asciz "pebbles remain.\n"
+ 58|msgBad: .asciz "Pretty sure I said remove 1-3 pebbles. You CAN read, right?\n"
+ 59|msgRoboPlay: .asciz "pebbles were picked up by computer.\n"
+ 60|msgWin: .asciz "Computer took the last pebble, you win!"
+ 61|msgLose: .asciz "You took the last pebble, you lose."
